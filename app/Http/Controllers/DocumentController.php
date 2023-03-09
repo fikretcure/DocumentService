@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
@@ -18,9 +19,19 @@ class DocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): string
     {
-        return 'store';
+
+        Storage::disk('public')->move("avatars/9N51q8FLGRfbGV7EFVXxvM8fSpCrP7TmDlwm2wxO.jpg","test/"."9N51q8FLGRfbGV7EFVXxvM8fSpCrP7TmDlwm2wxO.jpg" );
+
+
+//        return Storage::deleteDirectory("public/avatars");
+
+//        return   asset('storage') ;
+
+        return $request->file('avatar')->store(
+            'avatars', "public"
+        );
     }
 
     /**
